@@ -52,5 +52,96 @@ final Materi = Provider<List<String>>(
     "contents/materi/48.jpg",
     "contents/materi/49.jpg",
     "contents/materi/50.jpg",
+    "contents/materi/51.jpg",
+    "contents/materi/52.jpg",
+    "contents/materi/53.jpg",
+    "contents/materi/54.jpg",
+    "contents/materi/55.jpg",
+    "contents/materi/56.jpg",
+    "contents/materi/57.jpg",
+    "contents/materi/58.jpg",
+    "contents/materi/59.jpg",
+    "contents/materi/60.jpg",
   ],
 );
+
+final MateriValues = Provider<Map<String, Map<String, dynamic>>>((ref) => ({
+      'A': {
+        "index": 0,
+        "title": "MUQODDIMAH",
+      },
+      'B': {
+        "index": 3,
+        "title": "KAYFIYYAT SHOLAT JENAZAH",
+      },
+      'C': {
+        "index": 12,
+        "title": "PUJIAN ATAS MAYIT DAN MEMBUKA KEAIBANNYA",
+      },
+      'D': {
+        "index": 16,
+        "title": "PASAL PERTAMA\nPADA MENYATAKAN TENTANG KAYFIYAT TAHLILL",
+      },
+      'E': {
+        "index": 21,
+        "title":
+            "PASAL KE DUA\nPADA MENYATAKAN TENTANG KUBUR DAN HAL IHWAL MAYIT DALAM KUBUR",
+      },
+      'F': {
+        "index": 23,
+        "title": "PASAL KE TIGA\nPADA MENYATAKAN TENTANG KAYFIYAT ZIARAH KUBUR",
+      },
+      'G': {
+        "index": 25,
+        "title": "QASIDAH UNTUK ZIARAH BA’DU (SEBAGIAN) SHOLIHIN",
+      },
+      'H': {
+        "index": 26,
+        "title":
+            "PASAL KE EMPAT\nPADA MENYATAKAN TENTANG ZIARAH KUBUR DUA IBU BAPAK",
+      },
+      'I': {
+        "index": 30,
+        "title":
+            "PASAL KE LIMA\nPADA MENYATAKAN TENTANG DALIL SUNNAH ZIARAH KUBUR",
+      },
+      'J': {
+        "index": 32,
+        "title":
+            "PASAL KE ENAM\nPADA MENYATAKAN TENTANG DALIL TIDAK PUTUS TALI HUBUNGAN YANG HIDUP DAN YANG MATI",
+      },
+      'K': {
+        "index": 35,
+        "title":
+            "PASAL KE TUJUH\nPADA MENYATAKAN TENTANG ZIARAH KUBUR BAGI LAKI-LAKI DAN PEREMPUAN",
+      },
+      'L': {
+        "index": 36,
+        "title":
+            "PASAL KE DELAPAN\nPADA MENYATAKAN TENTANG MAKSUD DAN TUJUAN DARI ZIARAH KUBUR",
+      },
+      'M': {
+        "index": 38,
+        "title":
+            "PASAL KE SEMBILAN\nPADA MENYATAKAN TENTANG HIKMAH ZIARAH KUBUR",
+      },
+      'N': {
+        "index": 43,
+        "title":
+            "PASAL KE SEPULUH\nPADA MENYATAKAN TENTANG DALIL ATAS SUNNAH ZIARAH RASULILLAH",
+      },
+      'O': {
+        "index": 46,
+        "title":
+            "PASAL KE SEBELAS\nPADA MENYATAKAN TENTANG WASILAH/BERTAWASSUL",
+      },
+      'P': {
+        "index": 52,
+        "title":
+            "PASAL KE DUA BELAS\nPADA MENYATAKAN TENTANG TALQIN MAYIT DIDALAM KUBUR",
+      },
+      'Q': {
+        "index": 59,
+        "title": "PENUTUP",
+      },
+    }));

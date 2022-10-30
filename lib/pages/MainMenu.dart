@@ -25,7 +25,10 @@ class MainMenu extends HookWidget {
         action: [cancelText, "Lanjutkan"],
         actionPressed: [
           (_) async {
-            (await SharedPreferences.getInstance()).setInt(key, 0);
+            if (key != 'materi') {
+              (await SharedPreferences.getInstance()).setInt(key, 0);
+            }
+
             Navigator.pop(_);
             Navigator.push(_, MaterialPageRoute(builder: (_) => directPage[0]));
           },
@@ -86,15 +89,9 @@ class MainMenu extends HookWidget {
                   lastIndexRead,
                   [
                     const MateriListPage(),
-                    MateriPage(index: lastIndexRead),
+                    MateriPage(id: '', index: lastIndexRead),
                   ],
                   cancelText: "Pilih Bab",
-                );
-
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const MateriListPage(),
-                  ),
                 );
               },
             ),

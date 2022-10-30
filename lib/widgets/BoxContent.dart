@@ -2,13 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pedoman_kepengurusan_jenazah/providers/Materi.dart';
 import 'package:pedoman_kepengurusan_jenazah/widgets/ButtonActionContent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BoxContent extends HookWidget {
+class BoxContent extends HookConsumerWidget {
   final String keyContent;
   final int indexContent;
-  final String subTitle;
   final bool withTitle;
   final List<String> contents;
 
@@ -16,15 +17,16 @@ class BoxContent extends HookWidget {
     super.key,
     required this.keyContent,
     required this.indexContent,
-    required this.contents,
-    this.subTitle = "",
     this.withTitle = false,
+    required this.contents,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final controller = usePageController(initialPage: indexContent);
     final indexPage = useState(indexContent);
+
+    final values = ref.watch(MateriValues);
 
     return Stack(
       children: [
@@ -49,15 +51,32 @@ class BoxContent extends HookWidget {
                                 horizontal: 8,
                               ),
                               child: Center(
-                                child: AutoSizeText(
-                                  subTitle,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 1000,
-                                    fontWeight: FontWeight.bold,
+                                child: AnimatedSwitcher(
+                                  duration: const Duration(milliseconds: 300),
+                                  transitionBuilder: (child, animation) =>
+                                      FadeTransition(
+                                    opacity: animation,
+                                    child: child,
                                   ),
-                                  maxFontSize: 100,
-                                  maxLines: 3,
+                                  child: AutoSizeText(
+                                    values.keys
+                                            .map((e) => values[e]!['index'])
+                                            .contains(indexPage.value)
+                                        ? values.values.singleWhere(
+                                            (element) =>
+                                                element['index'] ==
+                                                indexPage.value,
+                                          )['title']
+                                        : '',
+                                    key: ValueKey<int>(indexPage.value),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 1000,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    maxFontSize: 14,
+                                    maxLines: 3,
+                                  ),
                                 ),
                               ),
                             ),

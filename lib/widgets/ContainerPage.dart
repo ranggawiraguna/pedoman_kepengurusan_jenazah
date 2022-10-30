@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pedoman_kepengurusan_jenazah/pages/MainMenu.dart';
 
 class ContainerPage extends StatelessWidget {
   final bool withHomeButton;
@@ -39,7 +40,14 @@ class ContainerPage extends StatelessWidget {
                               top: 10,
                               left: 10,
                               child: ElevatedButton(
-                                onPressed: () => Navigator.pop(context),
+                                onPressed: () => Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        const MainMenu(),
+                                  ),
+                                  ModalRoute.withName('/'),
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: const Size(0, 0),
                                   padding: const EdgeInsets.all(5),

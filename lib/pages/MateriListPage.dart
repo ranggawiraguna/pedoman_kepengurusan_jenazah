@@ -1,32 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pedoman_kepengurusan_jenazah/pages/MainMenu.dart';
 import 'package:pedoman_kepengurusan_jenazah/pages/MateriPage.dart';
+import 'package:pedoman_kepengurusan_jenazah/providers/Materi.dart';
 import 'package:pedoman_kepengurusan_jenazah/widgets/ButtonMenu.dart';
 
-class MateriListPage extends HookWidget {
+class MateriListPage extends HookConsumerWidget {
   const MateriListPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final Map<String, int> pageList = {
-      'A': 1,
-      'B': 4,
-      'C': 13,
-      'D': 17,
-      'E': 22,
-      'F': 24,
-      'G': 26,
-      'H': 27,
-      'I': 31,
-      'J': 33,
-      'K': 36,
-      'L': 37,
-      'M': 39,
-      'N': 44,
-      'O': 47,
-      'P': 53,
-      'Q': 60,
-    };
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pageList = ref.watch(MateriValues);
+
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(
@@ -61,7 +46,7 @@ class MateriListPage extends HookWidget {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) => MateriPage(
-                                            index: pageList[e]!,
+                                            id: e,
                                           ),
                                         ),
                                       );
@@ -94,7 +79,14 @@ class MateriListPage extends HookWidget {
                         top: 10,
                         left: 10,
                         child: ElevatedButton(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () => Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) =>
+                                  const MainMenu(),
+                            ),
+                            ModalRoute.withName('/'),
+                          ),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(0, 0),
                             padding: const EdgeInsets.all(5),

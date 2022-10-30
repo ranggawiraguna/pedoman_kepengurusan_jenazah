@@ -5,14 +5,16 @@ import 'package:pedoman_kepengurusan_jenazah/widgets/BoxContent.dart';
 import 'package:pedoman_kepengurusan_jenazah/widgets/ContainerPage.dart';
 import 'package:pedoman_kepengurusan_jenazah/widgets/DecorationPage.dart';
 
-class MateriPage extends ConsumerWidget {
-  final int index;
+class MateriPage extends HookConsumerWidget {
+  final String id;
+  final int? index;
 
-  const MateriPage({super.key, required this.index});
+  const MateriPage({super.key, this.index, required this.id});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final contents = ref.watch(Materi);
+    final values = ref.watch(MateriValues);
 
     return ContainerPage(
       title: "MATERI",
@@ -20,11 +22,9 @@ class MateriPage extends ConsumerWidget {
       decoration: const DecorationPage(),
       child: BoxContent(
         keyContent: 'materi',
-        indexContent: index,
-        contents: contents,
+        indexContent: index ?? values[id]!['index'],
         withTitle: true,
-        subTitle:
-            'PASAL KEDELAPAN PADA MENYATAKAN TENTANG MAKSUD DAN TUJUAN DARI ZIARAH KUBUR',
+        contents: contents,
       ),
     );
   }
