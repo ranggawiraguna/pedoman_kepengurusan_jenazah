@@ -55,6 +55,6 @@ class FutureSplash {
   static final instance = FutureSplash._();
 
   Future initialize() async {
-    await Future.delayed(const Duration(seconds: 11));
+    await Future.delayed(const Duration(seconds: 7));
   }
 }

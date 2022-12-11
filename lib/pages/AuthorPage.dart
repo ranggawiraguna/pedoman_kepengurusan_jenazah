@@ -16,8 +16,8 @@ class AuthorPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final contents = ref.watch(Author);
-    final controller = usePageController(initialPage: index - 1);
-    final indexPage = useState(index);
+    final controller = usePageController(initialPage: index);
+    final indexPage = useState(index > 0 ? index + 1 : index);
     final pageView = useState(
       PageView(
         physics: const NeverScrollableScrollPhysics(),
@@ -27,6 +27,7 @@ class AuthorPage extends HookConsumerWidget {
           prefs.setInt("author", _);
         },
         children: contents
+            .sublist(1, contents.length)
             .map(
               (_) => InteractiveViewer(
                 minScale: 1,
@@ -48,34 +49,55 @@ class AuthorPage extends HookConsumerWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 40,
-                bottom: 52,
-                left: 30,
-                right: 30,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: const GradientBoxBorder(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFFFFD966),
-                        Color(0xFFFFC208),
-                        Color(0xFFAB8100),
-                      ],
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              transitionBuilder: (Widget child, Animation<double> animation) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+              child: indexPage.value == 0
+                  ? Padding(
+                      key: const ValueKey<bool>(false),
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        bottom: 52,
+                        left: 0,
+                        right: 0,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Center(child: Image.asset(contents[0])),
+                      ),
+                    )
+                  : Padding(
+                      key: const ValueKey<bool>(true),
+                      padding: const EdgeInsets.only(
+                        top: 40,
+                        bottom: 52,
+                        left: 30,
+                        right: 30,
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: const GradientBoxBorder(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Color(0xFFFFD966),
+                                Color(0xFFFFC208),
+                                Color(0xFFAB8100),
+                              ],
+                            ),
+                            width: 10,
+                          ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Container(
+                          color: Colors.white,
+                          child: pageView.value,
+                        ),
+                      ),
                     ),
-                    width: 10,
-                  ),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Container(
-                  color: Colors.white,
-                  child: pageView.value,
-                ),
-              ),
             ),
           ),
           Positioned(
@@ -87,7 +109,7 @@ class AuthorPage extends HookConsumerWidget {
                   ? () {
                       indexPage.value--;
                       controller.animateToPage(
-                        indexPage.value,
+                        indexPage.value - 1,
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeIn,
                       );
@@ -103,11 +125,13 @@ class AuthorPage extends HookConsumerWidget {
               onPressed: indexPage.value < contents.length - 1
                   ? () {
                       indexPage.value++;
-                      controller.animateToPage(
-                        indexPage.value,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeIn,
-                      );
+                      if (indexPage.value > 1) {
+                        controller.animateToPage(
+                          indexPage.value - 1,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
+                      }
                     }
                   : null,
             ),
