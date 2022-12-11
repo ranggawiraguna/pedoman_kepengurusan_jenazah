@@ -28,7 +28,7 @@ class MateriListPage extends HookConsumerWidget {
                 child: ListView(
                   children: [
                     const AspectRatio(
-                      aspectRatio: 3740 / 1000,
+                      aspectRatio: 3740 / 1300,
                       child: SizedBox.shrink(),
                     ),
                     Padding(

@@ -72,7 +72,7 @@ final MateriValues = Provider<Map<String, Map<String, dynamic>>>((ref) => ({
       },
       'B': {
         "index": 3,
-        "title": "KAYFIYYAT SHOLAT JENAZAH",
+        "title": "KAYFIYAT SHOLAT JENAZAH",
       },
       'C': {
         "index": 12,
@@ -80,7 +80,7 @@ final MateriValues = Provider<Map<String, Map<String, dynamic>>>((ref) => ({
       },
       'D': {
         "index": 16,
-        "title": "PASAL PERTAMA\nPADA MENYATAKAN TENTANG KAYFIYAT TAHLILL",
+        "title": "PASAL PERTAMA\nPADA MENYATAKAN TENTANG KAYFIYAT TAHLIL",
       },
       'E': {
         "index": 21,

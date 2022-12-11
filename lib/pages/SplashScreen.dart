@@ -16,7 +16,6 @@ class SplashScreen extends HookWidget {
     }, []);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFB710),
       body: Container(
         color: Colors.white,
         child: Stack(
@@ -56,6 +55,6 @@ class FutureSplash {
   static final instance = FutureSplash._();
 
   Future initialize() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 11));
   }
 }
